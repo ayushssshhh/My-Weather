@@ -15,8 +15,8 @@
 </head>
 
 <body>
-    <div class="weather-app">
-        <div class="container">
+    <div class="weather-app <%= bgRender %>">
+        <div class="container" >
             <h3 class="brand">MY WEATHER</h3>
             <div>
                 <h1 class="temp"><%=tempRender%>&#176C</h1>
@@ -55,16 +55,16 @@
             <ul class="details">
                 <h4>Weather Details</h4>
                 <li>
-                    <span>Pressure hPa</span>
-                    <span class="cloud">89%</span>
+                    <span>Air Pressure</span>
+                    <span class="cloud"><%= pressureRender %> hPa</span>
                 </li>
                 <li>
                     <span>Humidity</span>
-                    <span class="humidity">89%</span>
+                    <span class="humidity"><%= humidRender %>%</span>
                 </li>
                 <li>
                     <span>Wind</span>
-                    <span class="Wind">7km/h</span>
+                    <span class="Wind"><%=windSpeedRender%>km/h</span>
                 </li>
             </ul>
 
@@ -77,40 +77,14 @@
                         <th>Min Temp</th>
                         <th>Max Temp</th>
                     </tr>
-                    <tr>
-                        <th>Today</th>
-                        <td><img src="./icons/day/113.png" alt=""></td>
-                        <td>9&#176C</td>
-                        <td>28&#176C</td>
-                    </tr>
-                    <!-- 2nd -->
-                    <tr>
-                        <th>Sat</th>
-                        <td><img src="./icons/day/266.png" alt=""></td>
-                        <td>9&#176C</td>
-                        <td>28&#176C</td>
-                    </tr>
-                    <!-- 3rd -->
-                    <tr>
-                        <th>Sun</th>
-                        <td><img src="./icons/day/116.png" alt=""></td>
-                        <td>9&#176C</td>
-                        <td>28&#176C</td>
-                    </tr>
-                    <!-- 4th -->
-                    <tr>
-                        <th>Mon</th>
-                        <td><img src="./icons/day/284.png" alt=""></td>
-                        <td>9&#176C</td>
-                        <td>28&#176C</td>
-                    </tr>
-                    <!-- 5 -->
-                    <tr>
-                        <th>Tue</th>
-                        <td><img src="./icons/day/119.png" alt=""></td>
-                        <td>9&#176C</td>
-                        <td>28&#176C</td>
-                    </tr>
+                    <% for(var i = 0 ; i<5 ; i++){ %>
+                        <tr>
+                            <th>Today</th>
+                            <td><img src="https://openweathermap.org/img/wn/<%= forIconRender[i] %>@2x.png" alt=""></td>
+                            <td><%= minTempRender[i] %>°C</td>
+                            <td><%= maxTempRender[i] %>°C</td>
+                        </tr>
+                    <%}%>
                 </table>
             </div>
 

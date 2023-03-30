@@ -41,14 +41,43 @@ app.get("/", (req, res) => {
             let wind = weatherData.wind.speed;
             let pressuer = weatherData.main.pressure;
             let cityName = weatherData.name;
+            let bgTime = weatherData.weather[0].main;
+            let bgMain = bg +"-" + bgTime;
+            console.log(bgMain);
 
-            console.log(bg + " " + cityDate + " " + temp + " " + humid + " " + desc + " " + icon + " " + wind + " " + pressuer + " " + cityName);
-            res.render("index" , {
-                tempRender : temp,
-                cityRender : cityName,
-                cityDateRender : cityDate,
-                descRender : desc,
-                iconRender : icon
+            // console.log(bg + " " + cityDate + " " + temp + " " + humid + " " + desc + " " + icon + " " + wind + " " + pressuer + " " + cityName);
+            
+            let urlFore = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + api_key;
+            https.get(urlFore, (respo) => {
+                
+                // collecting response data in buffer(hexadecimal format) dataType
+                respo.on("data", (data) => {
+                    const forecastData = JSON.parse(data); //explixtly coverting into objectData
+                    let minTemp = [];
+                    let maxTemp = [];
+                    let forIcon = [];
+
+                    for(var i = 0 ; i<5 ; i++){
+                        minTemp.push(forecastData.list[i].main.temp_min);
+                        maxTemp.push(forecastData.list[i].main.temp_max);
+                        forIcon.push(forecastData.list[i].weather[0].icon);
+                    }
+
+                    res.render("index" , {
+                        tempRender : temp,
+                        cityRender : cityName,
+                        cityDateRender : cityDate,
+                        descRender : desc,
+                        iconRender : icon,
+                        pressureRender : pressuer,
+                        humidRender : humid,
+                        windSpeedRender : wind,
+                        forIconRender : forIcon,
+                        minTempRender : minTemp,
+                        maxTempRender : maxTemp,
+                        bgRender : bgMain
+                    })
+                })
             })
         })
     })
@@ -79,15 +108,50 @@ app.post("/", (req, res) => {
             let wind = weatherData.wind.speed;
             let pressuer = weatherData.main.pressure;
             let cityName = weatherData.name;
+            let bgTime = weatherData.weather[0].main;
+            let bgMain = bg +"-" + bgTime;
+            console.log(bgMain);
 
-            console.log(bg + " " + cityDate + " " + temp + " " + humid + " " + desc + " " + icon + " " + wind + " " + pressuer + " " + cityName);
-            res.render("index" , {
-                tempRender : temp,
-                cityRender : cityName,
-                cityDateRender : cityDate,
-                descRender : desc,
-                iconRender : icon
-            })
+            // console.log(bg + " " + cityDate + " " + temp + " " + humid + " " + desc + " " + icon + " " + wind + " " + pressuer + " " + cityName);
+            
+            let urlFore = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + api_key;
+            try{
+                https.get(urlFore, (respo) => {
+                
+                    // collecting response data in buffer(hexadecimal format) dataType
+                    respo.on("data", (data) => {
+                        const forecastData = JSON.parse(data); //explixtly coverting into objectData
+                        let minTemp = [];
+                        let maxTemp = [];
+                        let forIcon = [];
+    
+                        for(var i = 0 ; i<5 ; i++){
+                            minTemp.push(forecastData.list[i].main.temp_min);
+                            maxTemp.push(forecastData.list[i].main.temp_max);
+                            forIcon.push(forecastData.list[i].weather[0].icon);
+                        }
+    
+                        res.render("index" , {
+                            tempRender : temp,
+                            cityRender : cityName,
+                            cityDateRender : cityDate,
+                            descRender : desc,
+                            iconRender : icon,
+                            pressureRender : pressuer,
+                            humidRender : humid,
+                            windSpeedRender : wind,
+                            forIconRender : forIcon,
+                            minTempRender : minTemp,
+                            maxTempRender : maxTemp,
+                            bgRender : bgMain
+                        })
+                    })
+                })
+            }
+
+            catch(error){
+                res.send("<center><h1> ERROR</h1><p>city data not available in api </p></center>");
+            }
         })
     });
 })

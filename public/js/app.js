@@ -17,4 +17,18 @@
 // }
 
 
+$(".day-Haze").css("background-image" , "url(../images/day/haze.jpg)");
+$(".night-Haze").css("background-image" , "url(../images/night/haze.jpg)");
+
+$(".night-Clear").css("background-image" , "url(../images/night/clear.jpg)");
+
+$(".day-Clouds").css("background-image" , "url(../images/day/cloud.jpg)");
+$(".night-Clouds").css("background-image" , "url(../images/night/cloud.jpg)");
+
+$(".day-Rain").css("background-image" , "url(../images/day/rain.jpg)");
+$(".night-Rain").css("background-image" , "url(../images/night/rain.jpg)");
+
+$(".day-Snow").css("background-image" , "url(../images/day/snow.jpg)");
+$(".night-Snow").css("background-image" , "url(../images/night/snow.jpg)");
+
 
