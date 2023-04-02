@@ -31,4 +31,9 @@ $(".night-Rain").css("background-image" , "url(../images/night/rain.jpg)");
 $(".day-Snow").css("background-image" , "url(../images/day/snow.jpg)");
 $(".night-Snow").css("background-image" , "url(../images/night/snow.jpg)");
 
+// Thunderstorm
+
+$(".day-Thunderstorm").css("background-image" , "url(../images/day/thunder.jpg)");
+$(".night-Thunderstorm").css("background-image" , "url(../images/night/thunder.jpg)");
+
 
